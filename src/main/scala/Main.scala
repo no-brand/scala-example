@@ -1,4 +1,3 @@
 object Main extends App {
-  val ages = Seq(42, 75, 29, 65)
-  println(s"The oldest person is ${ages.max}")
+  args.foreach(arg => println(arg))
 }
