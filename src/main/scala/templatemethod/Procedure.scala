@@ -6,8 +6,10 @@ trait Procedure {
 
   protected def in(args: List[String]): Unit
   protected def out(): Unit
+  protected var parser: Parser
 
-  def run(args: List[String]): Unit = {
+  def run(parser: Parser, args: List[String]): Unit = {
+    this.parser = parser
     in(args)
     out()
   }
@@ -15,10 +17,10 @@ trait Procedure {
 
 class One extends Procedure {
 
+  override protected var parser: Parser = _
   private var options: Map[String, Any] = Map()
 
   override protected def in(args: List[String]): Unit = {
-    val parser = new Parser(new PatternMatchParser())
     options = parser.parse(args)
   }
   override protected def out(): Unit = {
